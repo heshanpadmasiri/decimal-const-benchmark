@@ -1,4 +1,6 @@
 import sys
+from tqdm import tqdm
+
 def get_output_line(index, value):
     var_name = f'v_{index}'
     lines = [f'decimal {var_name} = {value};\n', f'io:println({var_name});\n']
@@ -8,7 +10,7 @@ def output_gen(output_file_name, values):
     with open(output_file_name, 'w') as file:
         file.write("import ballerina/io;\n\n");
         file.write("public function main() {\n");
-        for index, value in enumerate(values):
+        for index, value in tqdm(enumerate(values)):
             file.writelines(get_output_line(index, value))
         file.write("}\n");
 
