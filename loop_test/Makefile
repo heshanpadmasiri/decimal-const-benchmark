@@ -21,7 +21,7 @@ clean:
 	hyperfine --show-output --export-markdown $@ "java -jar nballerina_new.jar $<" "java -jar nballerina_old.jar $<"
 
 %.exe.md: %_old.exe %_new.exe
-	hyperfine -N --export-markdown $@ "./$<" "./$(word 2,$^)"
+	hyperfine -N --warmup 10 --export-markdown $@ "./$<" "./$(word 2,$^)"
 
 %_old.exe: %.bal
 	java -jar nballerina_old.jar $<
